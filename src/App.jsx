@@ -8,6 +8,7 @@ export default function App() {
   
     const [dice, setDice] = React.useState(allNewDice())
     const [tenzies, setTenzies] = React.useState(false)
+    const [gameStarted, setGameStarted] =React.useState(false)
     const [rolls, setRolls] = React.useState(0)
     const [timerSeconds, setTimerSeconds] = React.useState(0)
     
@@ -17,6 +18,7 @@ export default function App() {
         const allSameValue = dice.every(die => die.value === firstValue)
         if (allHeld && allSameValue) {
             setTenzies(true)
+            setGameStarted(false)
             updateBestRolls(rolls)
             updateBestTime(timerSeconds)
         }
@@ -49,6 +51,8 @@ export default function App() {
     }
     
     function rollDice() {
+        setGameStarted(true)
+        
         if(!tenzies) { 
             setRolls(prev=> prev+1)
             setDice(oldDice => oldDice.map(die => {
@@ -71,7 +75,7 @@ export default function App() {
                 die
         }))
     }
-    
+
     const diceElements = dice.map(die => (
         <Die 
             key={die.id} 
@@ -82,16 +86,17 @@ export default function App() {
     ))
 
  
-      
-    function startTimer() {
       React.useEffect(() => {
         let myTimer
-        if (!tenzies)
+        // console.log(gameStarted)
+        if(!gameStarted)
+        myTimer = 0;
+        if (gameStarted)
           myTimer = setTimeout(()=>setTimerSeconds(prev => prev+=1), 1000)
         return ()=> clearTimeout(myTimer)
       },
-      [timerSeconds])
-    }
+      [timerSeconds, gameStarted])
+    
     
     function getBestTime(){
       return localStorage.getItem('myTime') || 9999
@@ -105,7 +110,6 @@ export default function App() {
     //console.log(timerSeconds)
 
 
-    startTimer()
       
     return (
         <main>
@@ -125,7 +129,8 @@ export default function App() {
             Tenzies</h1>
             <p className="instructions"><strong>New Color-Tenzies game!</strong> <br/>
                                         Click each color dice to freeze it at its current state. 
-                                        Remember freezed dice and Roll until <br/><strong>all dice are frozen</strong> at the same state.
+                                        Remember freezed dice and Roll until <br/><strong>all dice are frozen</strong> at the same state. 
+                                        <br/>Remember each click! GL & HF
             </p>
             <div className="dice-container">
                 {diceElements}
