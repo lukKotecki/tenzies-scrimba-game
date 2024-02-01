@@ -63,7 +63,7 @@ export default function App() {
             setTimerSeconds(0)
         }
     }
-    
+
     function holdDice(id) {
         setDice(oldDice => oldDice.map(die => {
             return die.id === id ? 
@@ -88,7 +88,6 @@ export default function App() {
         let myTimer
         if (!tenzies)
           myTimer = setTimeout(()=>setTimerSeconds(prev => prev+=1), 1000)
-        
         return ()=> clearTimeout(myTimer)
       },
       [timerSeconds])
@@ -117,9 +116,17 @@ export default function App() {
               bestTime={getBestTime()}
               timerSeconds={timerSeconds}/>
             {tenzies && <Confetti />}
-            <h1 className="title">Tenzies</h1>
-            <p className="instructions">Roll until all dice are the same. 
-            Click each die to freeze it at its current value between rolls.</p>
+            <h1 className="title">  <span style={{color:'#2301ff'}}>C</span>
+                                    <span style={{color:'#a40b43'}}>o</span> 
+                                    <span style={{color:'#8846fa'}}>l</span> 
+                                    <span style={{color:'#35ff86'}}>o</span> 
+                                    <span style={{color:'#ffda35'}}>r</span> 
+                                    <span style={{color:'#fc35ff'}}>-</span> 
+            Tenzies</h1>
+            <p className="instructions"><strong>New Color-Tenzies game!</strong> <br/>
+                                        Click each color dice to freeze it at its current state. 
+                                        Remember freezed dice and Roll until <br/><strong>all dice are frozen</strong> at the same state.
+            </p>
             <div className="dice-container">
                 {diceElements}
             </div>
