@@ -7,3 +7,6 @@ Remember each click! GL & HF!
 
 
 [tenzies](https://github.com/lukKotecki/tenzies-scrimba-game/assets/19154055/91ac96d9-c404-4dfa-8b4d-8095aa93f4a2)
+
+
+![alt text](https://github.com/lukKotecki/tenzies-scrimba-game/color/tenzies.png?raw=true)
